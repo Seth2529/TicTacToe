@@ -39,39 +39,35 @@ namespace TicTacToe
         {
             int pontuacao = 0;
 
-            // 2 pontos se a posição for a central
             if (linha == 1 && coluna == 1)
             {
                 pontuacao += 2;
             }
 
-            // 1 ponto se a posição estiver em um dos cantos
             if ((linha == 0 || linha == 2) && (coluna == 0 || coluna == 2))
             {
                 pontuacao += 1;
             }
 
-            // -2 pontos se houver uma ou mais peças do adversário na mesma linha, coluna ou diagonal
             if (OponenteNaLinha(linha, tabuleiro) || OponenteNaColuna(coluna, tabuleiro) || OponenteNaDiagonal(linha, coluna, tabuleiro))
             {
                 pontuacao -= 2;
             }
 
-            // 4 pontos se a posição impedir a vitória do adversário
-            tabuleiro[linha, coluna] = 'X'; // Simular jogada do adversário
+            tabuleiro[linha, coluna] = 'X';
             if (Vencer('X', tabuleiro))
             {
                 pontuacao += 4;
             }
-            tabuleiro[linha, coluna] = ' '; // Reverter a simulação
+            tabuleiro[linha, coluna] = ' ';
 
-            // 4 pontos se a posição levar à vitória
-            tabuleiro[linha, coluna] = 'O'; // Simular jogada da máquina
+
+            tabuleiro[linha, coluna] = 'O';
             if (Vencer('O', tabuleiro))
             {
                 pontuacao += 4;
             }
-            tabuleiro[linha, coluna] = ' '; // Reverter a simulação
+            tabuleiro[linha, coluna] = ' ';
 
             return pontuacao;
         }
